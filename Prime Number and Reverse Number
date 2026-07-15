@@ -1,0 +1,80 @@
+// 1. Prime Number
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// Bruteforce Approach: T.C: O(n), S.C: O(1) 
+int isPrime(int n){
+    if(n<=1) return false;
+    for(int i = 2; i<n; i++)
+        if(n%i == 0) return false;
+        
+        
+    return true;
+    
+
+}
+
+void prime(int n){
+    for(int i = 2; i<=n; i++){
+        if(isPrime(i))
+            cout << i << " ";
+    }
+}
+
+// Optimized approach: T.C: O(sqrt(n)), S.C: O(1) 
+
+// int isPrime(int n){
+//     if(n<=1) return false;
+
+//     for(int i=2; i*i<=n; i++){
+//         if(n%i == 0) return false;
+//     }
+
+//     return true;
+// }
+
+int main(){
+    int n;
+    cin>>n;
+  
+    
+
+prime(n);
+// cout << isPrime(n);
+
+    return 0;
+}
+
+// 2. Reverse Number
+
+// T.C: O(logn), S.C: O(1)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int reverseDigit(int num){
+    int rev_num = 0;
+    while(num > 0){
+    rev_num = rev_num * 10 + num % 10;
+    num /= 10;
+
+    }
+
+    return rev_num;
+}
+
+
+int main(){
+    int num;
+    cin>>num;
+
+    cout << reverseDigit(num);
+
+
+    return 0;
+}
+
+
+
+
