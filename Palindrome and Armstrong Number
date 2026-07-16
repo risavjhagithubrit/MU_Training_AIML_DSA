@@ -1,0 +1,96 @@
+1. Palindrome Number
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// T.C: O(logn)
+// S.C: O(1)
+int isPalindrome(int n){
+
+    
+    int rev = 0;
+    int num = n;
+    while(num>0){
+        rev = rev*10 + num%10;
+        num/=10;
+    }
+
+    return (rev==n);
+}
+
+void countPalindrome(int min, int max){
+    for(int i = min; i<=max; i++){
+        if(isPalindrome(i))
+             cout << i << endl;
+    }
+}
+
+int main(){
+    // int n;
+    // cin>>n;
+
+    int min, max;
+    cin>>min>>max;
+    
+
+//   cout << isPalindrome(n);
+   countPalindrome(min, max);
+
+    return 0;
+
+}
+
+2. Armstrong Number
+
+/* T.C: O(logN)
+    S.C: O(1)
+    */
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int isArmstrong(int n){
+
+    int original = n, sum = 0;
+    int digits = 0;
+
+    int temp =n;
+    while(temp > 0){
+        digits++;
+        temp/=10;
+    }
+
+    temp = n;
+    while(temp > 0){
+    int digit = temp%10;
+    sum += pow(digit, digits);  
+    temp/=10;    
+    }
+
+    return sum == original;
+}
+
+void countArmstrong(int min, int max){
+    for(int i = min; i<=max; i++){
+        if(isArmstrong(i))
+             cout << i << endl;
+    }
+}
+
+
+int main(){
+    // int n;
+    // cin>>n;
+
+    int min, max;
+    cin>>min>>max;
+    
+
+    countArmstrong(min, max);
+// cout << isArmstrong(n);  // FOR BOOLEAN VALUE
+
+    return 0;
+}
+
+
+
