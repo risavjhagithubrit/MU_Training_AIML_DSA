@@ -1,0 +1,194 @@
+// 1. To Check Leap Year
+
+// Approach 1: Basic English Code(If-else)
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int year;
+
+    cout << "Enter Year : ";
+    cin >> year;
+
+    if(year % 400 == 0)
+    {
+        cout << "Leap Year";
+    }
+    else if(year % 100 == 0)
+    {
+        cout << "Not a Leap Year";
+    }
+    else if(year % 4 == 0)
+    {
+        cout << "Leap Year";
+    }
+    else
+    {
+        cout << "Not a Leap Year";
+    }
+
+    return 0;
+}
+
+// Approach 2: Using Logical Operator
+
+One-Line Interview Logic:-
+if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+{
+    cout << "Leap Year";
+}
+else
+{
+    cout << "Not Leap Year";
+}
+
+// Approach 3: Using Nested-If Statement
+
+#include <iostream>
+using namespace std;
+
+int main(){
+int n;
+cin>>n;
+
+if(n%4 == 0){
+    if(n%100 == 0){
+        n%400 == 0;
+        }
+            cout << "True";
+    }
+
+else{
+ cout << "False";
+}
+    return 0;
+}
+
+
+// 2. To find Largest Number
+
+// Approach 1(Logical And Operator)--
+   
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int main(){
+    int a, b, c;
+    cin>>a>>b>>c;
+
+ if(a>b && a>c){
+        cout << a <<"\n";
+    }
+    else if(b>a && b>c){
+        cout << b <<"\n";
+    }
+    else{
+        cout << c <<"\n";
+    }
+
+    return 0;
+} 
+
+// Approach 2 (Simple using Max Function)
+ 
+#include<bits/stdc++.h>
+using namespace std;
+
+int findmax(int a, int b){
+
+    return (a>=b) ? a : b;
+}
+
+int main(){
+    int a, b, c;
+    cin>>a>>b>>c;
+
+    int ans = findmax(max(a,b), c);
+
+    cout << ans;
+    return 0;
+}
+
+// 3. Perfect Number
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    cin>>n;
+
+    int sum = 0;
+    for(int i=1; i<=n/2; i++){
+        if(n%i == 0){       
+            sum += i;
+        }
+    }
+    if(sum == n){
+        cout << "true";
+    }
+    else{
+        cout << "false";
+    }
+    return 0;
+}
+
+// 4. Strong Number
+
+/* Input  : n = 145
+Output : Yes
+Sum of digit factorials = 1! + 4! + 5!
+                        = 1 + 24 + 120
+                        = 145
+Input :  n = 534
+Output : No
+
+*/
+
+ #include<bits/stdc++.h>
+using namespace std;
+
+int isStrong(int n){
+    int sum = 0;
+    int original = n;
+    int fact[n]{1,1};
+    for(int i=2; i<n; i++){
+        fact[i] = i*fact[i-1];
+    }
+    while(n>0){
+        sum += fact[n%10];
+        n/=10;
+    }
+    return sum == original;
+}
+int main(){
+    int n;
+    cin>>n;
+
+
+   cout << isStrong(n);
+    return 0;
+}
+
+// 5. Even-Odd Number
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    cin>>n;
+
+    if(n%2 == 0){  cout << "even";
+
+        }
+    else { cout << "odd";
+        }
+
+    return 0;
+    
+}
+
