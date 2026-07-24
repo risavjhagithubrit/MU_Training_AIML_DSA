@@ -1,0 +1,27 @@
+// 1.Swap The Numbers
+
+    // code here
+    // Approach-1 : Using 3rd Variavle
+//   int temp = a+b;
+//     a = temp-a;
+//     b = temp-b;
+
+// Approach-2: Without using 3rd vaiable
+// a = a+b; // 3
+// b=a-b;  // 1
+// a = a-b; // 2
+
+// Approach 3: Bitwise Operator
+a = a^b;
+b = a^b;
+a = a^b;
+
+// 2. Single Number
+
+ int singleNumber(vector<int>& nums) {
+        int ans =0;
+        for(auto x : nums){
+            ans ^= x;
+        }
+        return ans;
+    }
