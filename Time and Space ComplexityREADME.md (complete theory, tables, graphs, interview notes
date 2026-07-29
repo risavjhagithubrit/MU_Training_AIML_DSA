@@ -1,0 +1,506 @@
+Time and Space Complexity
+
+What is Time Complexity?
+Time Complexity tells
+How the running time of an algorithm grows when the input size increases.
+It does NOT tell the exact execution time.
+Example
+n = 10
+Algorithm A = 1 ms
+
+n = 100000
+
+Algorithm A = 500 ms
+We study
+Growth Rate
+instead of milliseconds.
+
+Why Companies Ask Time Complexity?
+Because every company wants efficient code.
+Suppose
+Searching
+
+Algorithm A
+O(n)
+
+Algorithm B
+O(log n)
+For
+n = 1,000,000
+Linear Search
+Needs almost
+1,000,000 comparisons
+Binary Search
+Needs only
+≈20 comparisons
+Huge difference.
+
+Big O Notation
+Represents
+Worst Case Complexity
+Example
+for(int i=0;i<n;i++)
+runs
+n times
+
+O(n)
+
+Big Theta
+Average Case
+Θ(n)
+
+Big Omega
+Best Case
+Ω(1)
+Mostly interviewers ask only Big-O.
+
+=> Graph: 
+
+
+
+
+ 
+As the input size increases:
+O(1) remains almost flat.
+O(log n) increases very slowly.
+O(n) grows proportionally.
+O(n log n) is slightly larger than linear.
+O(n²) becomes much slower.
+O(n³) is impractical for large inputs.
+O(2ⁿ) and O(n!) become impossible for even moderate input sizes.
+
+
+Company-Level Practice Questions
+Level 1 (Easy)
+Q1
+Find Time Complexity
+for(int i=0;i<n;i++)
+    cout<<i;
+Answer
+O(n)
+
+Q2
+for(int i=0;i<n;i++)
+{
+    for(int j=0;j<n;j++)
+        cout<<i+j;
+}
+Answer
+O(n²)
+
+Q3
+int x=arr[50];
+Answer
+O(1)
+
+Q4
+Binary Search complexity?
+A. O(n)
+B. O(log n)
+C. O(nlogn)
+D. O(√n)
+Answer
+B
+
+Q5
+Which algorithm always has
+O(nlogn)
+Worst case?
+A Quick Sort
+B Merge Sort
+C Bubble Sort
+D Insertion Sort
+Answer
+Merge Sort
+
+Medium Level
+Q6
+for(int i=1;i<n;i*=2)
+Answer
+O(log n)
+
+Q7
+for(int i=n;i>0;i/=2)
+Answer
+O(log n)
+
+Q8
+for(int i=0;i<n;i++)
+    for(int j=0;j<i;j++)
+Answer
+O(n²)
+
+Q9
+for(int i=1;i<n;i++)
+    for(int j=1;j<n;j*=2)
+Answer
+O(n log n)
+
+Q10
+while(n>1)
+{
+    n/=2;
+}
+Answer
+O(log n)
+
+Company Interview MCQs
+MCQ 1
+for(int i=1;i<n;i*=3)
+Complexity?
+A O(n)
+B O(log₃n)
+C O(nlogn)
+D O(√n)
+Answer
+B
+
+MCQ 2
+for(int i=0;i<n;i++)
+    for(int j=i;j<n;j++)
+Complexity?
+A O(n)
+B O(n²)
+C O(nlogn)
+D O(logn)
+Answer
+B
+
+MCQ 3
+Which sorting algorithm requires extra memory?
+A Heap
+B Merge
+C Selection
+D Bubble
+Answer
+Merge Sort
+
+MCQ 4
+Which algorithm is NOT stable?
+A Bubble
+B Merge
+C Insertion
+D Heap
+Answer
+Heap
+
+MCQ 5
+Which complexity grows fastest?
+A O(nlogn)
+B O(n²)
+C O(2ⁿ)
+D O(n³)
+Answer
+C
+
+
+
+Order of Complexities
+Students must memorize this.
+O(1)
+
+↓
+
+O(log log n)
+
+↓
+
+O(log n)
+
+↓
+
+O(√n)
+
+↓
+
+O(n)
+
+↓
+
+O(n log n)
+
+↓
+
+O(n²)
+
+↓
+
+O(n³)
+
+↓
+
+O(2ⁿ)
+
+↓
+
+O(n!)
+
+Interview Trick
+Every step downward is slower.
+
+Easy Memory Trick
+=> Trick 1: 
+
+Constant
+
+↓
+
+Logarithmic
+
+↓
+
+Linear
+
+↓
+
+Linear Log
+
+↓
+
+Quadratic
+
+↓
+
+Cubic
+
+↓
+
+Polynomial
+
+↓
+
+Exponential
+
+↓
+
+Factorial
+CLLQCEEF
+(Constant, Log, Linear, Quadratic, Cubic, Exponential, Factorial)
+
+=> Trick 2(Order of Time Complexity):
+
+C L P E F 2EL ( Employee Salary structure: C L-> Casual Leave Means “Constant”, & “Logarithmic”. PF(Pronunciation as PEF )-> Provident Fund Means “Polynomial”, “Exponential”, & “Factorial” and finally E L(Earned Leave which is max., So, 2EL will write ). Means “Double Exponential”.
+
+All are the first character of Time Complexity.
+
+Module 2
+Rules for Calculating Time Complexity
+Rule 1
+Ignore Constants
+5n
+
+↓
+
+O(n)
+
+Rule 2
+Take Highest Power
+n²+n+100
+
+↓
+
+O(n²)
+
+Rule 3
+Nested loops multiply
+for()
+    for()
+O(n²)
+
+Rule 4
+Consecutive loops add
+for()
+
+for()
+O(n+n)
+
+↓
+
+O(n)
+
+Rule 5
+Different variables
+for(i<n)
+
+for(j<m)
+Complexity
+O(n+m)
+
+Rule 6
+Nested different variables
+for(i<n)
+
+   for(j<m)
+Complexity
+O(nm)
+
+Module 3
+Common Complexities
+O(1)
+arr[5]
+
+push()
+
+pop()
+
+swap()
+
+O(log n)
+Binary Search
+Heap operations
+Balanced BST
+
+O(√n)
+Prime checking
+Divisor problems
+
+O(n)
+Linear Search
+Traversal
+Maximum element
+Minimum element
+Sum
+
+O(n log n)
+Merge Sort
+Heap Sort
+Quick Sort (Average)
+
+O(n²)
+Bubble
+Selection
+Insertion (Average)
+Nested loops
+
+O(2ⁿ)
+Subset Generation
+Backtracking
+
+O(n!)
+Permutation generation
+Travelling Salesman brute force
+
+Module 4
+Space Complexity
+Space Complexity
+means
+Extra memory used by algorithm.
+Example
+int x;
+O(1)
+
+int arr[n];
+O(n)
+
+Recursive function
+Depth = n
+Space = O(n)
+
+Auxiliary Space
+Interviewers mostly ask
+Extra memory
+NOT input memory.
+
+Example
+vector<int> ans(n)
+Auxiliary Space
+O(n)
+
+Important Interview Algorithms
+Algorithm
+Best
+Average
+Worst
+Space
+Linear Search
+O(1)
+O(n)
+O(n)
+O(1)
+Binary Search
+O(1)
+O(log n)
+O(log n)
+O(1)
+Bubble Sort (optimized)
+O(n)
+O(n²)
+O(n²)
+O(1)
+Selection Sort
+O(n²)
+O(n²)
+O(n²)
+O(1)
+Insertion Sort
+O(n)
+O(n²)
+O(n²)
+O(1)
+Merge Sort
+O(nlogn)
+O(nlogn)
+O(nlogn)
+O(n)
+Quick Sort
+O(nlogn)
+O(nlogn)
+O(n²)
+O(logn)
+Heap Sort
+O(nlogn)
+O(nlogn)
+O(nlogn)
+O(1)
+DFS
+O(V+E)
+-
+-
+O(V)
+BFS
+O(V+E)
+-
+-
+O(V)
+Dijkstra (Priority Queue)
+O((V+E)logV)
+-
+-
+O(V)
+Floyd Warshall
+O(V³)
+-
+-
+O(V²)
+Prim (Heap)
+O((V+E)logV)
+-
+-
+O(V)
+Kruskal
+O(ElogE)
+-
+-
+O(V)
+
+
+
+Comparison of All Cases
+Case
+Meaning
+Mathematical Notation
+Example
+Best Case
+Minimum execution time
+Ω(f(n))
+Target at first position in Linear Search
+Average Case
+Expected execution time
+Θ(f(n))
+Target in the middle
+Worst Case
+Maximum execution time
+O(f(n))
+Target absent or at the last position
+
+
