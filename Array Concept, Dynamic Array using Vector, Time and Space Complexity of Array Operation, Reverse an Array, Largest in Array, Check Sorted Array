@@ -1,0 +1,109 @@
+//  How to initialize entire array through any value
+
+#include<iostream>
+using namespace std;
+int main(){
+    int a[10] = {0};
+    int b[10] = {5};
+    int c[10];
+    int d[10] = {3};
+     for(int i = 0;i<10;i++){
+       c[i] = 5;
+    }
+    cout<<"Elements of array a: ";
+    for(int i=0;i<10;i++){
+        cout<< a[i] <<" ";
+    }
+    cout<<"\n";
+    cout<<"Elements of array b: ";
+    for(int i = 0;i<10;i++){
+        cout<<b[i] <<" ";
+    }
+    cout<<"\n";
+    cout<<"Elements of array c: ";
+    for(int i=0;i<10;i++){
+        cout<<c[i]<<" ";
+    }
+    cout<<"\n";
+    cout<<"Elements of array d: ";
+    // Undefined Behavior (UB)
+    for(int i=0;i<20;i++){
+        cout<<d[i]<<" ";
+        // cout<<"\n";
+    }
+    return 0;
+}
+
+/* Staic and Dynamic Array */
+
+#include<iostream>
+#include<vector>
+ 
+using namespace std;
+
+int main(){
+    // int arr[100];
+    // // Will get the garbage value( created on the stack but never filled with numbers.)
+    // cout << arr[100];
+
+    vector<int> arr;
+    arr.push_back(10);
+     arr.push_back(20);
+      arr.push_back(30);
+
+    cout << arr[0];
+
+    return 0;
+}
+
+// Reverse an Array
+
+ // Approach 1: Using reverse function -> Inbuilt
+        // reverse(arr.begin(), arr.end());
+
+        // Approach-2
+        int n = arr.size();
+        for(int i=0; i<n/2; i++){
+            swap(arr[i], arr[n-i-1]);
+        }
+    }
+
+// Largest in Array
+
+  // Approach 1: Using sort function
+        int n = arr.size();
+        sort(arr.begin(), arr.end());
+        return arr[n-1];
+        
+        // Approach 2: 
+        int n = arr.size();
+        int largest = INT_MIN;
+        for(int i=0; i<n; i++){
+            if(arr[i]> largest){
+                largest = arr[i];
+            }
+        }
+        return largest;
+    }
+
+// Check Sorted Array
+
+  // Approach 1
+int n = arr.size();
+        for(int i=1; i<n; i++){
+            if(arr[i] < arr[i-1]){
+                return 0;
+            }
+        }
+        return 1;
+
+//  // Approach 2
+
+ int n = arr.size();
+        for(int i=0; i<n-1; i++){
+            if(arr[i+1] < arr[i]){
+                return 0;
+            }
+        }
+        return 1;
+
