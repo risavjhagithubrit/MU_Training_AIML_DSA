@@ -1,0 +1,60 @@
+// Missing in Array
+
+=> Code: 
+int missingNum(vector<int>& arr) {
+        // code here
+        long int n = arr.size()+1;
+        long int sum = 0;
+        long int total = n*(n+1)/2;
+        for(long int num : arr){
+            sum += num;
+        }
+        return total-sum;
+    }
+
+=> Time Complexity: O(n)
+   Space Complexity: O(1)
+
+// Equilibrium Point
+
+=> Code: 
+    int findEquilibrium(vector<int> &arr) {
+        // code here
+        int totalSum = 0, leftSum =0, n = arr.size();
+        
+        for(int num : arr){
+            totalSum += num;
+        }
+        
+        for(int i=0; i<n; i++){
+            if(leftSum == totalSum-leftSum-arr[i]){
+                return i;
+            }
+            leftSum += arr[i];
+        }
+        return -1;
+    }
+
+=> Time Complexity: O(n)
+   Space Complexity: O(1)
+
+// Find the Middle Index in Array
+
+=> Code: 
+    int findMiddleIndex(vector<int>& nums) {
+        int totalSum =0, leftSum = 0, n=nums.size();
+
+        for(int num : nums){
+            totalSum += num;
+        }
+        for(int i=0; i<n; i++){
+            if(leftSum == totalSum-leftSum-nums[i]){
+                return i;
+            }
+            leftSum += nums[i];
+        }
+        return -1;
+    }
+
+=> Time Complexity: O(n)
+   Space Complexity: O(1)
