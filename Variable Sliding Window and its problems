@@ -1,0 +1,209 @@
+=> Variable Sliding Window
+Unlike fixed window,
+the size changes.
+
+=> Example
+Find longest subarray
+whose sum ≤ K
+Window expands.
+If condition breaks,
+shrink it.
+
+Example
+Array
+
+2 1 5 2 3
+
+K = 7
+
+Start
+2
+
+Sum=2
+Expand
+2 1
+
+Sum=3
+Expand
+2 1 5
+
+Sum=8
+
+Too large
+Shrink
+Remove 2
+
+1 5
+
+Sum=6
+Expand
+1 5 2
+
+Sum=8
+
+Again shrink
+Continue.
+
+Variable Window Algorithm
+Expand Right
+
+↓
+
+Condition satisfied?
+
+↓
+
+YES
+
+Update Answer
+
+↓
+
+Expand
+
+↓
+
+NO
+
+Shrink Left
+
+↓
+
+Repeat
+
+Generic Template
+int left = 0;
+
+for(int right = 0; right < n; right++){
+
+    // Expand window
+
+    while(condition breaks){
+
+        // Shrink
+
+        left++;
+    }
+
+    // Update answer
+
+}
+
+Example
+Longest Subarray Sum ≤ K
+int left=0;
+
+int sum=0;
+
+int ans=0;
+
+for(int right=0;right<n;right++){
+
+    sum+=arr[right];
+
+    while(sum>K){
+
+        sum-=arr[left];
+
+        left++;
+    }
+
+    ans=max(ans,right-left+1);
+}
+
+Dry Run
+Array
+
+2 1 5 2 3
+
+K=7
+Initially
+left=0
+
+right=0
+
+sum=0
+Expand
+2
+
+sum=2
+Expand
+2 1
+
+sum=3
+Expand
+2 1 5
+
+sum=8
+
+Shrink
+
+1 5
+
+sum=6
+Continue.
+
+Complexity
+Time
+O(n)
+Why?
+Although there are two pointers,
+each pointer moves from 0 → n−1 only once.
+So,
+Left Pointer
+
+0 → n
+
+Right Pointer
+
+0 → n
+Total movement
+2n
+Ignoring constants
+O(n)
+Space
+O(1)
+
+
+⭐ Key Sliding Window Rule
+Nested loops do not automatically mean O(n²). If both pointers move only forward and each pointer traverses the array at most once, the total complexity is O(n).
+
+Fixed vs Variable Window
+Feature
+Fixed Window
+Variable Window
+Window Size
+Constant
+Changes
+Pointer Movement
+Right moves
+Left & Right move
+Used For
+K consecutive elements
+Longest/Smallest satisfying a condition
+Complexity
+O(n)
+O(n)
+
+=> Minimum Size Subarray Sum
+
+int minSubArrayLen(int target, vector<int>& nums) {
+        int sum =0, left=0, shortest = INT_MAX;
+
+        for(int right=0; right<nums.size(); right++){
+            sum += nums[right];
+
+            while(sum >=target){
+                shortest = min(shortest, right-left+1);
+
+                sum-=nums[left];
+                left++;
+            }
+        }
+        return shortest == INT_MAX ? 0 : shortest;
+    }
+
+=> Complexity:
+T.C: O(n)
+S.C: O(1)
+
