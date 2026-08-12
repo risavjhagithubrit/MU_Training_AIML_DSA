@@ -1,0 +1,405 @@
+=> Two Pointer Technique 
+
+1. What is Two Pointer?
+The Two Pointer technique is an algorithmic technique where we maintain two indices/pointers to traverse an array or string efficiently.
+Instead of repeatedly examining the same elements using nested loops, we move two pointers according to a specific condition.
+Basic structure:
+int left = 0;
+int right = n - 1;
+while(left < right) {
+ // process
+ // move left or right
+}
+Basic visualization
+Array:
+
+  0   1   2   3   4   5
+  ↓                   ↓
+left                right
+
+  2   4   6   8   10  12
+The pointers move toward each other:
+ L → → →       ← ← ← R
+
+2. Why Do We Use Two Pointers?
+Consider this problem:
+Find whether a sorted array contains two numbers whose sum is equal to target.
+Brute force:
+for(int i = 0; i < n; i++) {
+    for(int j = i + 1; j < n; j++) {
+
+        if(arr[i] + arr[j] == target)
+            return true;
+    }
+}
+Complexity
+Time = O(n²)
+Space = O(1)
+With Two Pointers:
+int left = 0;
+int right = n - 1;
+while(left < right) {
+int sum = arr[left] + arr[right];
+if(sum == target)
+        return true;
+ else if(sum < target)
+        Left++;
+ else
+        right--;
+}
+
+return false;
+Complexity
+Time = O(n)
+Space = O(1)
+This is the major benefit.
+
+3. The Three Major Two-Pointer Patterns
+For placement preparation:
+                   TWO POINTER
+                         │
+        ┌────────────────┼────────────────┐
+        │           		     │               			 │
+        ▼            		    ▼              			  ▼
+ Opposite Direction   Same Direction   Multiple Arrays
+        │              		  │               		 │
+     L ← → R          Slow/Fast        Merge/Compare
+
+Pattern 1: Opposite Direction
+Pointers start at opposite ends.
+int left = 0;
+int right = n - 1;
+Visualization:
+2  4  6  8  10  12
+↑                  ↑
+L                  R
+Pointers move toward each other.
+Common applications:
+Pair Sum in sorted array
+Reverse an array
+Palindrome
+Container With Most Water
+3Sum
+4Sum
+
+Pattern 2: Same Direction
+Both pointers start from the beginning.
+left
+ ↓
+2  4  6  8  10
+ ↓
+right
+Typically:
+int left = 0;
+int right = 0;
+One pointer represents the beginning of a region and another represents the current/ending position.
+This overlaps heavily with Sliding Window.
+Examples:
+Remove duplicates
+Move zeros
+Longest valid segment
+Variable sliding window
+
+Pattern 3: Slow and Fast Pointer
+Both pointers move in the same direction but at different speeds or for different purposes.
+slow → 
+fast → →
+Common applications:
+Remove duplicates
+Linked-list cycle detection
+Find middle of linked list
+Array manipulation
+For arrays:
+int slow = 0;
+for(int fast = 0; fast < n; fast++) {
+ if(condition) {
+        arr[slow] = arr[fast];
+        slow++;
+    }
+}
+
+4. Pattern 1 — Pair Sum in Sorted Array
+Suppose:
+arr = [1, 2, 4, 6, 8, 9]
+target = 10
+Start:
+1  2  4  6  8  9
+↑              ↑
+L              R
+Calculate:
+1 + 9 = 10
+Found!
+
+What if sum is too small?
+Suppose:
+arr = [1, 2, 4, 6, 8, 9]
+target = 15
+Initially:
+1 + 9 = 10
+Since:
+10 < 15
+We need a larger sum.
+Because the array is sorted, increase left:
+1  2  4  6  8  9
+   ↑               ↑
+   L              R
+Now:
+2 + 9 = 11
+Again too small.
+Move left.
+
+What if sum is too large?
+Suppose:
+target = 7
+Initially:
+1 + 9 = 10
+Too large.
+We need a smaller value.
+Since the array is sorted:
+right--;
+1  2  4  6  8  9
+↑              ↑
+L             R
+Now:
+1 + 8 = 9
+Continue.
+
+5. The Key Rule
+For a sorted array:
+sum < target
+       ↓
+increase left
+       ↓
+sum becomes larger
+And:
+sum > target
+       ↓
+decrease right
+       ↓
+sum becomes smaller
+Memorize:
+             sum
+               │
+       ┌───────┴───────┐
+       ↓               	↓
+     < target        > target
+       ↓               ↓
+   left++           right--
+
+6. Why Sorting Is Important
+The Two Pointer Pair Sum approach depends on the array being sorted.
+Example:
+[8, 2, 5, 1, 9]
+If:
+left = 0
+right = 4
+we have:
+8 + 9 = 17
+We cannot determine whether to move left or right intelligently because the array isn't sorted.
+Therefore:
+The opposite-direction two-pointer pair-sum technique generally requires sorted data.
+If sorting is allowed:
+sort(arr.begin(), arr.end());
+then:
+Sorting = O(n log n)
+Two Pointer = O(n)
+Total:
+O(n log n)
+
+7. Example Code
+bool twoSum(vector<int>& arr, int target) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while(left < right) {
+int sum = arr[left] + arr[right];
+         if(sum == target) {
+            return true;
+        }
+        else if(sum < target) {
+            left++;
+        }
+        else {
+            right--;  }
+    }
+  return false;
+}
+Complexity
+If array is already sorted:
+Time  = O(n)
+Space = O(1)
+If we need to sort:
+Sorting       = O(n log n)
+Two Pointer   = O(n)
+
+Total         = O(n log n)
+
+8. Pattern 2 — Reverse an Array
+This is the simplest Two Pointer problem.
+Array:
+1  2  3  4  5
+↑           ↑
+L           R
+Swap:
+5  2  3  4  1
+Move:
+   ↑     ↑
+    L     R
+Continue.
+
+Code
+void reverseArray(vector<int>& arr) {
+   int left = 0;
+    int right = arr.size() - 1;
+
+    while(left < right) {
+    swap(arr[left], arr[right]);
+        left++;
+        right--;
+    }
+}
+Complexity
+Time  = O(n)
+Space = O(1)
+Why time is O(n)?
+We process approximately:
+n / 2
+elements.
+Big-O ignores constants:
+O(n/2) = O(n)
+
+9. Pattern 3 — Palindrome
+A palindrome reads the same from both directions.
+Example:
+madam
+m a d a m
+↑       ↑
+L       R
+Compare:
+s[left] == s[right]
+Then move inward.
+
+Code
+bool isPalindrome(string s) {
+   int left = 0;
+    int right = s.size() - 1;
+
+    while(left < right) {
+   if(s[left] != s[right])
+            return false;
+        left++;
+        right--;
+    }
+
+    return true;
+}
+Complexity
+Time  = O(n)
+Space = O(1)
+
+10. Pattern 4 — Move Zeroes
+Example:
+[0,1,0,3,12]
+Expected:
+[1,3,12,0,0]
+Here we use slow and fast pointers.
+slow → position where next non-zero belongs
+fast → scans the array
+
+Code
+void moveZeroes(vector<int>& nums) {
+  int slow = 0;
+ for(int fast = 0; fast < nums.size(); fast++) {
+   if(nums[fast] != 0) {
+   swap(nums[slow], nums[fast]);
+slow++;
+        }
+    }
+}
+Complexity
+Time  = O(n)
+Space = O(1)
+
+11. How slow and fast Work
+Example:
+0  1  0  3  12
+↑
+S
+↑
+F
+fast finds 1.
+0  1  0  3  12
+   ↑
+   F
+↑
+S
+Swap:
+1  0  0  3  12
+Move slow.
+1  0  0  3  12
+   ↑
+   S
+fast continues scanning.
+This pattern is extremely useful for in-place array modification.
+
+12. Two Pointer vs Sliding Window
+Students often confuse these.
+Two Pointer
+Sliding Window
+General technique
+Specialized two-pointer technique
+May move toward each other
+Usually maintains contiguous window
+May work on sorted arrays
+Often works on contiguous subarrays/substrings
+Pair sum
+Longest/shortest subarray
+Palindrome
+Maximum sum window
+3Sum
+Minimum size subarray
+Move zeroes
+At most K distinct
+
+Important relationship
+Sliding Window
+      ↓
+Uses two pointers
+      ↓
+left + right
+So:
+Sliding Window is a specialized application of the Two Pointer technique.
+
+13. Two Pointer vs Brute Force
+Consider:
+Find two numbers whose sum = target
+Brute Force
+for(int i = 0; i < n; i++) {
+    for(int j = i+1; j < n; j++) {
+        if(arr[i] + arr[j] == target)
+            return true;
+    }
+}
+Complexity:
+O(n²)
+Two Pointer
+left = 0
+right = n-1
+
+while(left < right)
+Complexity:
+O(n)
+
+=> Move Zeroes
+ void moveZeroes(vector<int>& nums) {
+        int j=0, n = nums.size();
+        for(int i=0; i<n; i++){
+            if(nums[i] != 0){
+                swap(nums[i], nums[j++]);
+                
+            }
+        }
+    }
+
+=> Complexity:
+T.C: O(n)
+S.C: O(1)
