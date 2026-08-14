@@ -1,0 +1,297 @@
+=> Hashing
+. What is Hashing?
+Hashing is a technique used to store and retrieve data quickly using a key.
+The main idea:
+Instead of searching through an entire array to find something, use a data structure that lets us access it almost directly.
+Without hashing
+Suppose:
+arr = [10, 20, 30, 40, 50]
+To check whether 40 exists, you may have to scan:
+10 → 20 → 30 → 40
+Time: O(N)
+With hashing
+We can store values in a hash-based structure:
+{10, 20, 30, 40, 50}
+Now checking whether 40 exists is approximately:
+O(1)
+So hashing is especially useful for:
+Searching
+Counting
+Finding duplicates
+Finding frequencies
+Checking existence
+Finding pairs
+Grouping elements
+
+2. Frequency Counting
+This is the most important beginner concept in hashing.
+Suppose:
+arr = [2, 3, 2, 5, 3, 2]
+We want:
+2 → 3 times
+3 → 2 times
+5 → 1 time
+We create a frequency map:
+freq[2] = 3
+freq[3] = 2
+freq[5] = 1
+Basic pattern
+unordered_map<int, int> freq;
+
+for (int x : arr) {
+   freq[x]++;
+}
+After this:
+freq[x] = number of times x occurs
+This single pattern solves a huge number of problems.
+
+3. unordered_map
+In C++, the most commonly used hashing data structure is:
+unordered_map<Key, Value>
+Example:
+unordered_map<int, int> mp;
+
+mp[10] = 5;
+mp[20] = 7;
+Meaning:
+10 → 5
+20 → 7
+Access
+cout << mp[10];
+Output:
+5
+Insert
+mp[30] = 8;
+Increment frequency
+mp[10]++;
+If:
+mp[10] = 5
+then:
+mp[10] = 6
+
+4. Why mp[x]++ Works
+This is extremely important to understand.
+Suppose:
+unordered_map<int, int> mp;
+
+mp[10]++;
+If 10 doesn't exist, C++ creates:
+10 → 0
+and then increments it:
+10 → 1
+Another:
+mp[10]++;
+becomes:
+10 → 2
+So:
+for (int x : arr)
+   mp[x]++;
+automatically builds the frequency table.
+
+5. Finding Frequency of a Particular Element
+int x = 2;
+
+if (mp.find(x) != mp.end()) {
+   cout << mp[x];
+}
+Or, if you know you're okay with a missing key producing 0:
+cout << mp[x];
+
+6. find() vs count()
+find()
+if (mp.find(x) != mp.end())
+Means:
+Does x exist?
+count()
+For an unordered_map:
+if (mp.count(x))
+also checks existence.
+Example:
+if (mp.count(10)) {
+   cout << "Present";
+}
+For maps, count() returns either:
+0 → absent
+1 → present
+
+7. Frequency of Characters
+Hashing isn't only for integers.
+Consider:
+"banana"
+Frequency:
+b → 1
+a → 3
+n → 2
+Code:
+string s = "banana";
+
+unordered_map<char, int> freq;
+
+for (char c : s) {
+   freq[c]++;
+}
+
+8. Frequency of Words
+Suppose:
+"apple banana apple mango banana apple"
+We can count words:
+vector<string> words = {
+   "apple", "banana", "apple",
+   "mango", "banana", "apple"
+};
+
+unordered_map<string, int> freq;
+
+for (string word : words) {
+   freq[word]++;
+}
+Result:
+apple  → 3
+banana → 2
+mango  → 1
+This is the same frequency pattern.
+
+9. Hashing Using Array
+Before unordered_map, understand an important idea.
+Suppose:
+arr = [1, 2, 1, 3, 2, 1]
+If values are small and known to be within a range, we can use an array:
+int freq[100] = {0};
+
+for (int x : arr) {
+   freq[x]++;
+}
+Then:
+freq[1]  // 3
+freq[2]  // 2
+freq[3]  // 1
+This is sometimes called array hashing.
+
+10. Array Hashing vs unordered_map
+Array
+int freq[100000] = {};
+Advantages:
+Very fast
+Simple
+O(1) access
+Disadvantage:
+Requires manageable key range
+For example:
+x = 10^9
+You cannot practically create:
+int freq[1000000000];
+unordered_map
+unordered_map<int, int> freq;
+Works well even when values are large:
+10
+1000000
+-500
+1000000000
+So:
+Small bounded values → array hashing
+ Large/negative/arbitrary values → unordered_map
+
+11. map vs unordered_map
+This is important for interviews.
+unordered_map
+unordered_map<int, int> mp;
+Average:
+insert → O(1)
+search → O(1)
+delete → O(1)
+Elements are not sorted.
+map
+map<int, int> mp;
+Operations:
+insert → O(log N)
+search → O(log N)
+delete → O(log N)
+Keys are maintained in sorted order.
+Example:
+map<int, int> mp;
+
+mp[5]++;
+mp[1]++;
+mp[3]++;
+Iteration gives:
+1
+3
+5
+With unordered_map, order is not guaranteed.
+
+12. Most Important Frequency Problems
+You should master these in order.
+Count frequency of every element
+Count frequency of characters
+Find the most frequent element
+Find the least frequent element
+Check whether an element exists
+Find duplicate elements
+Count distinct elements
+
+13. Count Distinct Elements
+Example:
+arr = [1, 2, 2, 3, 3, 3, 4]
+Distinct elements:
+1, 2, 3, 4
+Answer:
+4
+Using hashing:
+unordered_set<int> st;
+
+for (int x : arr) {
+   st.insert(x);
+}
+
+cout << st.size();
+Remember:
+unordered_set
+Stores only keys:
+{1, 2, 3, 4}
+unordered_map
+Stores key-value pairs:
+1 → 1
+2 → 2
+3 → 3
+4 → 1
+
+=> Problem: Frequency of Elements
+
+=> Code:
+
+class Solution {
+  public:
+    vector<vector<int>> countFreq(vector<int>& arr) {
+        // code here
+        map<int,int> freqMap;
+        for(int element : arr){
+            freqMap[element]++;
+        }
+        vector<vector<int>> result;
+        for(auto const& pair : freqMap){
+            result.push_back({pair.first, pair.second});
+        }
+        return result;
+    }
+};
+
+=> Problem: Majority Element
+
+=> Code: 
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int count=0, candidate=0;
+        for(int num: nums){
+        if(count==0){
+            candidate =num;
+        }
+        if(num==candidate){
+            count++;
+        }
+        else count--;
+        }
+        return candidate;
+
+    }
+};
