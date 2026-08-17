@@ -1,0 +1,127 @@
+MODULE 1 — String Fundamentals
+1.1 What is a String?
+A string is a sequence of characters.
+string s = "hello";
+Internally:
+Index:    0   1   2   3   4
+         ↓   ↓   ↓   ↓   ↓
+String:   h   e   l   l   o
+Important concept:
+A string can be treated like a character array with additional functionality.
+
+1.2 Important C++ String Syntax
+Students should know:
+string s = "hello";
+
+cout << s.length();
+cout << s.size();
+
+cout << s[0];
+
+s[0] = 'H';
+
+s.push_back('!');
+
+s.pop_back();
+
+1.3 Important String Functions
+ 
+Function
+Purpose
+length()
+Length of string
+size()
+Length of string
+push_back()
+Add character
+pop_back()
+Remove last character
+substr()
+Extract substring
+find()
+Search substring/character
+erase()
+Remove characters
+insert()
+Insert characters
+replace()
+Replace characters
+
+Example:
+string s = "abcdef";
+
+cout << s.substr(2, 3);
+Output:
+cde
+
+=> Example:
+
+//  #include<iostream>
+//  #include<string>
+#include<bits/stdc++.h>
+ using namespace std;
+
+ int main(){
+    string s= "hello";
+    //  s.push_back('a');
+    //  s.pop_back();
+    // s[1] = 'a';
+
+    for(char ch : s){
+   
+    cout << ch;
+ }
+
+    return 0;
+ }
+
+
+
+MODULE 2 — String Traversal & Manipulation
+2.1 Traversing a String
+Normal loop:
+for(int i = 0; i < s.length(); i++){
+   cout << s[i];
+}
+Range-based loop:
+for(char ch : s){
+   cout << ch;
+}
+
+2.2 Reverse a String
+Two Pointer Approach & other approaches discussed.
+int i = 0;
+int j = s.length() - 1;
+
+while(i < j){
+   swap(s[i], s[j]);
+   i++;
+   j--;
+}
+Complexity
+Time  = O(n)
+Space = O(1)
+
+=> Problem: Count Group Occurrences
+
+class Solution {
+  public:
+    int getCount(string s, int k) {
+        // code here
+        unordered_map<char, int> mp;
+        mp[s[0]] = 1;
+        for(int i=1; i<s.size(); i++){
+            if(s[i] != s[i-1]){
+                mp[s[i]]++;
+            }
+        }
+        
+        int val=0;
+        for(auto it : mp){
+            if(it.second == k){
+                val++;
+            }
+        }
+        return val;
+    }
+};
