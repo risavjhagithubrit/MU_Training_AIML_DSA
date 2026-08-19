@@ -1,0 +1,78 @@
+=> Two Pointer on Strings
+ 
+This connects directly with the Two Pointer technique you have already taught for arrays.
+
+4.1 Palindrome Check
+Example:
+madam
+Compare:
+m           m
+↓           ↓
+left       right
+
+a           a
+
+d
+Code:
+bool isPalindrome(string s){
+
+   int i = 0;
+   int j = s.length() - 1;
+
+   while(i < j){
+
+       if(s[i] != s[j])
+           return false;
+
+       i++;
+       j--;
+   }
+
+   return true;
+}
+Complexity
+Time  = O(n)
+Space = O(1)
+
+4.2 Valid Palindrome
+Example:
+"A man, a plan, a canal: Panama"
+Need to:
+Ignore spaces
+Ignore punctuation
+Ignore case
+Check palindrome
+ 
+
+4.3 Reverse String
+int i = 0;
+int j = s.length() - 1;
+
+while(i < j){
+   swap(s[i], s[j]);
+   i++;
+   j--;
+}
+
+4.4 Reverse Words
+Example:
+Input:
+"hello world"
+
+Output:
+"world hello"
+This introduces:
+String traversal
+Spaces
+stringstream
+Reverse logic
+
+Important Two-Pointer Problems
+Easy
+Reverse String
+Valid Palindrome
+Reverse Vowels of a String
+Medium
+Valid Palindrome II
+Reverse Words in a String
+String Compression
