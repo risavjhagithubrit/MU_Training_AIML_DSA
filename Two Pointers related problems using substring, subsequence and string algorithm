@@ -1,0 +1,68 @@
+=>  Longest Substring Without Repeating Characters:
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<char, int> ans;
+        int maxlen=0, start=0;
+        for(int i=0; i<s.length(); i++){
+            if(ans.find(s[i]) != ans.end() && ans[s[i]]>=start){
+                start = ans[s[i]]+1;
+            }
+            ans[s[i]] = i;
+            maxlen = max(maxlen, i-start+1);
+        }
+        return maxlen;
+    }
+};
+
+=>   Find the Index of the First Occurrence in a String
+
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        return haystack.find(needle);
+    }
+};
+
+=> Valid Palindrome
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int start=0, end= s.size()-1;
+        while(start<=end){
+            if(!isalnum(s[start])){ start++; continue;}
+            if(!isalnum(s[end])){ end--; continue; }
+            if(tolower(s[start]) != tolower(s[end])) return false;
+            else{
+                start++;
+                end--;
+            }
+        }
+        return true;
+    }
+};
+
+=> String Compression
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+         int i = 0;
+        for(int j=1, count =1; j<=chars.size(); j++, count++){
+            if(j == chars.size() || chars[j] != chars[j-1]){
+                chars[i] = chars[j-1];
+                i++;
+                if(count >= 2)
+                for(char digit : to_string(count)){
+                    chars[i] = digit;
+                    i++;
+                }
+                count = 0;
+            }
+
+        }
+        return i;
+        
+    }
+};
